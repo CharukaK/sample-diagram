@@ -1,3 +1,5 @@
+import { ShapeViewState } from "./viewstates/shape-viewstate";
+
 export enum ShapeType {
     CIRCLE = 'Circle',
     TRIANGLE = 'Triangle',
@@ -7,6 +9,7 @@ export enum ShapeType {
 export interface Shape {
     name: string;
     type: string;
+    viewState: ShapeViewState;
 }
 
 export interface Circle extends Shape {
