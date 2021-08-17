@@ -12,7 +12,7 @@ export function Editor() {
 
     const onSubmit = () => {
         const sanitizedJson = sanitizeBadJson(textAreaVal)
-        dispatch({type: AppStateMutateActions.UPDATE_MODEL, payload: JSON.parse(sanitizedJson)})
+        dispatch({ type: AppStateMutateActions.UPDATE_MODEL, payload: { model: JSON.parse(sanitizedJson) } })
     }
 
     return (

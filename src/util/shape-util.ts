@@ -41,7 +41,7 @@ export function traverse(el: Shape, visitor: Visitor): void {
             });
         }
 
-        if (!el.type) {
+        if (!childEl.type) {
             return;
         }
 
