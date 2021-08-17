@@ -4,8 +4,8 @@ import { CircleViewState } from "../util/viewstates/circle-viewstate";
 import { ShapeViewState } from "../util/viewstates/shape-viewstate";
 import { SquareViewState } from "../util/viewstates/square-viewstate";
 
-export const DEFAULT_SQUARE_SIDE = 20;
-export const SQUARE_GAP = 5;
+export const DEFAULT_SQUARE_SIDE = 40;
+export const SQUARE_GAP = 10;
 
 export class SizingVisitor implements Visitor {
 
@@ -32,8 +32,8 @@ export class SizingVisitor implements Visitor {
                     height += childVS.bBox.h + SQUARE_GAP;
                 });
 
-                viewState.bBox.h = height;
-                viewState.bBox.w = height;
+                viewState.bBox.h = height/2;
+                viewState.bBox.w = height/2;
             }
         }
     }
