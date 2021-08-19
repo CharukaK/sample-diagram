@@ -1,5 +1,6 @@
 import { Square } from "../../../../util/types";
 import { getComponent } from "../../util";
+import { NameComponent } from "../NameComponent";
 
 interface SquareProps {
     model: Square;
@@ -28,6 +29,7 @@ export function SquareComponent(props: SquareProps) {
                 stroke-width="3"
             />
             {components}
+            <NameComponent model={model} />
         </>
     )
 }

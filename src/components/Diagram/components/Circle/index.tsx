@@ -1,5 +1,6 @@
 import { Circle } from "../../../../util/types";
 import { getComponent } from "../../util";
+import { NameComponent } from "../NameComponent";
 
 interface SquareProps {
     model: Circle;
@@ -26,6 +27,7 @@ export function CircleComponent(props: SquareProps) {
                 fill="#fff"
             />
             {components}
+            <NameComponent model={model} />
         </>
     )
 }

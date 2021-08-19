@@ -15,6 +15,7 @@ export class SizingVisitor implements Visitor {
     beginVisitTriangle(el: Triangle) {
         if (el.viewState) {
             const viewState: TriangleViewState = el.viewState as TriangleViewState;
+            viewState.shapeName.h = NAME_GAP + NAME_HEIGHT;
 
             viewState.bBox.h = DEFAULT_SHAPE_DIMENSION;
             viewState.bBox.w = DEFAULT_SHAPE_DIMENSION;
@@ -24,13 +25,14 @@ export class SizingVisitor implements Visitor {
     beginVisitSquare(el: Square) {
         if (el.viewState) {
             const viewState: SquareViewState = el.viewState as SquareViewState;
+            viewState.shapeName.h = NAME_GAP + NAME_HEIGHT;
 
             if (el.children.length > 0) {
                 let height = COMPONENT_GAP;
 
                 el.children.forEach(child => {
                     const childVS: ShapeViewState = child.viewState as ShapeViewState;
-                    height += childVS.bBox.h + COMPONENT_GAP;
+                    height += childVS.bBox.h + childVS.shapeName.h + COMPONENT_GAP;
                 })
 
                 viewState.bBox.h = height;
@@ -45,7 +47,7 @@ export class SizingVisitor implements Visitor {
     endVisitCircle(el: Circle) {
         if (el.viewState) {
             const viewState: CircleViewState = el.viewState as CircleViewState;
-            
+            viewState.shapeName.h = NAME_GAP + NAME_HEIGHT;
 
             if (el.children.length === 0) {
                 viewState.bBox.r = DEFAULT_SHAPE_DIMENSION;
@@ -54,10 +56,11 @@ export class SizingVisitor implements Visitor {
 
                 el.children.forEach((child: Shape) => {
                     const childVS: ShapeViewState = child.viewState as ShapeViewState;
-                    height += childVS.bBox.h + COMPONENT_GAP;
+                    height += childVS.bBox.h + childVS.shapeName.h + COMPONENT_GAP;
                 });
 
                 viewState.bBox.r = height / 2;
+                viewState.bBox.h = viewState.shapeName.h + height;
             }
         }
     }

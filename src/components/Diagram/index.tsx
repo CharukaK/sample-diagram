@@ -1,5 +1,4 @@
-import React, { useContext } from "react"
-import { AppContext, useAppContext } from "../../context/AppContext"
+import { useAppContext } from "../../context/AppContext"
 import { ShapeKindChecker } from "../../util/shape-util";
 import { Shape } from "../../util/types";
 import { getComponent } from "./util";
@@ -18,17 +17,13 @@ export function Diagram() {
         const viewState = (model as Shape).viewState;
 
         if (ShapeKindChecker.isCircleShape(model)) {
-            height = viewState.bBox.r * 2 + 10;
+            height = viewState.bBox.h;
             width = viewState.bBox.r * 2 + 10;
         } else {
             height = viewState.bBox.h;
             width = viewState.bBox.h;
         }
     }
-
-
-
-
 
     return (
         <svg width={width} height={height}>
