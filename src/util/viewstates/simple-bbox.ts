@@ -5,4 +5,6 @@ export class SimpleBBox {
     public h: number = 0;
     public w: number = 0;
     public r: number = 0;
+    public cx: number = 0;
+    public cy: number = 0;
 }

@@ -18,8 +18,8 @@ export function CircleComponent(props: SquareProps) {
     return (
         <>
             <circle
-                cx={viewState.bBox.x}
-                cy={viewState.bBox.y}
+                cx={viewState.bBox.cx}
+                cy={viewState.bBox.cy}
                 r={viewState.bBox.r}
                 stroke="black"
                 stroke-width="3"

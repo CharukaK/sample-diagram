@@ -29,28 +29,54 @@ const reducer = (state: AppState, action: AppStateMutateAction) => {
     }
 }
 
-/**
- * {type: "Circle", children: [
-{type: "Square", children: [
-
-]},
-{type: "Square", children: [
-
-]}
-]}
- */
-
 const defaultValue: any = {}
 
-const AppContext = React.createContext(defaultValue);
+export const AppContext = React.createContext(defaultValue);
 
 export const useAppContext = () => React.useContext(AppContext);
 
 export const AppContextProvider = (props: any) => {
-    const [state, dispatch] = React.useReducer(reducer, {});
+    const [state, dispatch] = React.useReducer(reducer, { model: undefined });
     return (
         <AppContext.Provider value={{ state, dispatch }}>
             {props.children}
         </AppContext.Provider>
     );
 }
+
+/**
+ * 
+{
+    "name": "circle1",
+    "type":"Circle",
+    "children":[
+        {
+            "name": "square1",
+            "type":"Square",
+            "children":[
+                
+            ]
+        },
+        {
+            "name": "square2",
+            "type":"Square",
+            "children":[
+                {
+                    "name": "triangle1",
+                    "type":"Triangle"
+                },
+                {
+                    "name": "triangle2",
+                    "type":"Triangle"
+                }
+            ]
+        },
+        {
+            "type":"Square",
+            "children":[
+                
+            ]
+        }
+    ]
+}
+ */

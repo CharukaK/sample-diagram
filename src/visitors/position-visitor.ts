@@ -1,30 +1,45 @@
 import { Visitor } from "../util/base-visitor";
-import { Circle } from "../util/types";
+import { Circle, Square } from "../util/types";
 import { CircleViewState } from "../util/viewstates/circle-viewstate";
 import { ShapeViewState } from "../util/viewstates/shape-viewstate";
-import { SQUARE_GAP } from "./sizing-visitor";
+import { SquareViewState } from "../util/viewstates/square-viewstate";
+import { COMPONENT_GAP } from "./sizing-visitor";
 
 export class PositionVisitor implements Visitor {
-    private height: number = 0;
 
     beginVisitCircle(el: Circle) {
-        let height = 0;
+        if (el.viewState) {
+            const viewState: CircleViewState = el.viewState as CircleViewState;
+            viewState.bBox.cx = viewState.bBox.r;
+            viewState.bBox.cy = viewState.bBox.r;
+            viewState.bBox.x = 0;
+            viewState.bBox.y = 0;
 
-        const viewState: CircleViewState = el.viewState as CircleViewState;
-        viewState.bBox.x = viewState.bBox.r + 5;
-        viewState.bBox.y = viewState.bBox.r + 5;
+            let height = viewState.bBox.x + COMPONENT_GAP;
+            el.children.forEach(child => {
+                const childVS: ShapeViewState = child.viewState as ShapeViewState;
 
-        height += SQUARE_GAP;
+                childVS.bBox.x = viewState.bBox.r - (childVS.bBox.w / 2);
+                childVS.bBox.y = height;
 
-        el.children.forEach(child => {
+                height += childVS.bBox.h + COMPONENT_GAP;
+            })
+        }
+    }
 
-            const childVS = child.viewState as ShapeViewState;
-            childVS.bBox.x = viewState.bBox.r - childVS.bBox.w/3;
-            childVS.bBox.y = height + childVS.bBox.w/3;
+    beginVisitSquare(el: Square) {
+        if (el.viewState) {
+            const viewState: SquareViewState = el.viewState as SquareViewState;
 
-            height += SQUARE_GAP;
+            let height = viewState.bBox.y + COMPONENT_GAP;
+            el.children.forEach(child => {
+                const childVS: ShapeViewState = child.viewState as ShapeViewState;
 
-            height += childVS.bBox.h;
-        });
+                childVS.bBox.x = viewState.bBox.x + viewState.bBox.w / 2 - childVS.bBox.w / 2;
+                childVS.bBox.y = height;
+
+                height += childVS.bBox.h + COMPONENT_GAP;
+            })
+        }
     }
 }
