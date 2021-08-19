@@ -20,7 +20,7 @@ export function CircleComponent(props: SquareProps) {
             <circle
                 cx={viewState.bBox.x}
                 cy={viewState.bBox.y}
-                r={viewState.bBox.h}
+                r={viewState.bBox.r}
                 stroke="black"
                 stroke-width="3"
                 fill="#fff"

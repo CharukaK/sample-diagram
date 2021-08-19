@@ -23,8 +23,7 @@ export class SizingVisitor implements Visitor {
             const viewState: CircleViewState = el.viewState as CircleViewState;
 
             if (el.children.length === 0) {
-                viewState.bBox.h = DEFAULT_SQUARE_SIDE;
-                viewState.bBox.w = DEFAULT_SQUARE_SIDE;
+                viewState.bBox.r = DEFAULT_SQUARE_SIDE;
             } else {
                 let height = SQUARE_GAP;
                 el.children.forEach((child: Shape) => {
@@ -32,8 +31,7 @@ export class SizingVisitor implements Visitor {
                     height += childVS.bBox.h + SQUARE_GAP;
                 });
 
-                viewState.bBox.h = height/2;
-                viewState.bBox.w = height/2;
+                viewState.bBox.r = height/2;
             }
         }
     }

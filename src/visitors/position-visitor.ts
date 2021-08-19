@@ -11,16 +11,16 @@ export class PositionVisitor implements Visitor {
         let height = 0;
 
         const viewState: CircleViewState = el.viewState as CircleViewState;
-        viewState.bBox.x = viewState.bBox.h + 5;
-        viewState.bBox.y = viewState.bBox.w + 5;
+        viewState.bBox.x = viewState.bBox.r + 5;
+        viewState.bBox.y = viewState.bBox.r + 5;
 
         height += SQUARE_GAP;
 
         el.children.forEach(child => {
 
             const childVS = child.viewState as ShapeViewState;
-            childVS.bBox.x = viewState.bBox.h;
-            childVS.bBox.y = height;
+            childVS.bBox.x = viewState.bBox.r - childVS.bBox.w/3;
+            childVS.bBox.y = height + childVS.bBox.w/3;
 
             height += SQUARE_GAP;
 
