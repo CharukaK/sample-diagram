@@ -3,7 +3,7 @@ import { Circle, Square } from "../util/types";
 import { CircleViewState } from "../util/viewstates/circle-viewstate";
 import { ShapeViewState } from "../util/viewstates/shape-viewstate";
 import { SquareViewState } from "../util/viewstates/square-viewstate";
-import { COMPONENT_GAP, NAME_GAP, NAME_HEIGHT } from "./sizing-visitor";
+import { COMPONENT_GAP } from "./sizing-visitor";
 
 export class PositionVisitor implements Visitor {
 
@@ -19,7 +19,7 @@ export class PositionVisitor implements Visitor {
             viewState.bBox.y = 0;
 
             let height = viewState.bBox.x + COMPONENT_GAP;
-            el.children.forEach(child => {
+            el.children.forEach((child, index) => {
                 const childVS: ShapeViewState = child.viewState as ShapeViewState;
 
                 childVS.shapeName.y = height;
@@ -27,6 +27,19 @@ export class PositionVisitor implements Visitor {
 
                 childVS.bBox.x = viewState.bBox.r - (childVS.bBox.w / 2);
                 childVS.bBox.y = height + childVS.shapeName.h;
+
+                // set worker line positions
+                switch (index) {
+                    case 0:
+                        viewState.workerLine.x1 = viewState.bBox.r;
+                        viewState.workerLine.y1 = height + childVS.shapeName.h;
+                        break;
+                    case el.children.length - 1:
+                        viewState.workerLine.x2 = viewState.bBox.r;
+                        viewState.workerLine.y2 = height + childVS.shapeName.h;
+                        break;
+                    default:
+                }
 
 
                 height += childVS.bBox.h + COMPONENT_GAP + childVS.shapeName.h;
@@ -39,7 +52,7 @@ export class PositionVisitor implements Visitor {
             const viewState: SquareViewState = el.viewState as SquareViewState;
 
             let height = viewState.bBox.y + COMPONENT_GAP;
-            el.children.forEach(child => {
+            el.children.forEach((child, index) => {
                 const childVS: ShapeViewState = child.viewState as ShapeViewState;
 
                 childVS.shapeName.y = height;
@@ -47,6 +60,20 @@ export class PositionVisitor implements Visitor {
 
                 childVS.bBox.x = viewState.bBox.x + viewState.bBox.w / 2 - childVS.bBox.w / 2;
                 childVS.bBox.y = height + childVS.shapeName.h;
+
+                // set worker line positions
+                switch (index) {
+                    case 0:
+                        viewState.workerLine.x1 = viewState.bBox.x + viewState.bBox.w / 2;
+                        viewState.workerLine.y1 = height + childVS.shapeName.h;
+                        break;
+                    case el.children.length - 1:
+                        viewState.workerLine.x2 = viewState.bBox.x + viewState.bBox.w / 2;
+                        viewState.workerLine.y2 = height + childVS.shapeName.h;
+                        break;
+                    default:
+                }
+
 
                 height += childVS.bBox.h + COMPONENT_GAP + childVS.shapeName.h;
             })

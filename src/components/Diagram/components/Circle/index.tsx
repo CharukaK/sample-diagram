@@ -1,6 +1,7 @@
 import { Circle } from "../../../../util/types";
 import { getComponent } from "../../util";
 import { NameComponent } from "../NameComponent";
+import { WorkerLine } from "../WorkerLine";
 
 interface SquareProps {
     model: Circle;
@@ -25,6 +26,9 @@ export function CircleComponent(props: SquareProps) {
                 stroke="black"
                 stroke-width="3"
                 fill="#fff"
+            />
+            <WorkerLine 
+                model={model}
             />
             {components}
             <NameComponent model={model} />

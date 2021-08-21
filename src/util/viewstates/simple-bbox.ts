@@ -7,4 +7,8 @@ export class SimpleBBox {
     public r: number = 0;
     public cx: number = 0;
     public cy: number = 0;
+    public x1: number = 0;
+    public x2: number = 0;
+    public y1: number = 0;
+    public y2: number = 0;;
 }
