@@ -80,3 +80,5 @@ export class PositionVisitor implements Visitor {
         }
     }
 }
+
+export const positionVisitor = new PositionVisitor();

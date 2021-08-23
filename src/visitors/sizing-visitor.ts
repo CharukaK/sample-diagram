@@ -22,7 +22,7 @@ export class SizingVisitor implements Visitor {
         }
     }
 
-    beginVisitSquare(el: Square) {
+    endVisitSquare(el: Square) {
         if (el.viewState) {
             const viewState: SquareViewState = el.viewState as SquareViewState;
             viewState.shapeName.h = NAME_GAP + NAME_HEIGHT;
@@ -65,3 +65,5 @@ export class SizingVisitor implements Visitor {
         }
     }
 }
+
+export const sizingVisitor = new SizingVisitor();

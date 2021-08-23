@@ -1,9 +1,9 @@
 import React from "react";
 import { traverse } from "../util/shape-util";
 import { Circle } from "../util/types";
-import { InitVisitor } from "../visitors/init-visitor";
-import { PositionVisitor } from "../visitors/position-visitor";
-import { SizingVisitor } from "../visitors/sizing-visitor";
+import { initVisitor } from "../visitors/init-visitor";
+import { positionVisitor } from "../visitors/position-visitor";
+import { sizingVisitor } from "../visitors/sizing-visitor";
 
 export interface AppState {
     model: Circle;
@@ -22,9 +22,9 @@ const reducer = (state: AppState, action: AppStateMutateAction) => {
     switch (action.type) {
         case AppStateMutateActions.UPDATE_MODEL:
             const model = action.payload.model;
-            traverse(model, new InitVisitor());
-            traverse(model, new SizingVisitor());
-            traverse(model, new PositionVisitor());
+            traverse(model, initVisitor);
+            traverse(model, sizingVisitor);
+            traverse(model, positionVisitor);
             return { ...state, ...action.payload }
     }
 }

@@ -30,3 +30,5 @@ export class InitVisitor implements Visitor {
         }
     }
 }
+
+export const initVisitor = new InitVisitor();
